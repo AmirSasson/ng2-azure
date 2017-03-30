@@ -106,10 +106,11 @@ IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
 )
 echo Handling Angular build
 echo working directory: %cd%
+echo DEPLOYMENT_TARGET: %DEPLOYMENT_TARGET%
 :: 4. Build ng app
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NODE_EXE! node_modules/@angular/cli/bin/ng build
+  call :ExecuteCmd "!NODE_EXE!" "%DEPLOYMENT_TARGET%"/node_modules/@angular/cli/bin/ng build
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
